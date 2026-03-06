@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -46,7 +47,12 @@ public class PlayerMover : MonoBehaviour
             _minRotation,
             _rotationSpeed * Time.fixedDeltaTime);
     }
-    
+
+    public void Reset()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.identity;
+    }
 
     private void OnJump(InputAction.CallbackContext context)
     {

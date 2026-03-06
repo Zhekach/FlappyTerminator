@@ -5,9 +5,9 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     public event Action<IInteractable> CollisionDetected;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.TryGetComponent(out IInteractable interactable))
+        if (other.gameObject.TryGetComponent(out IInteractable interactable))
         {
             CollisionDetected?.Invoke(interactable);
         }
