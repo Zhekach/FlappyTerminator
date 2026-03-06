@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerTracker : MonoBehaviour
+public class CameraPlayerTracker : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private float _xOffset;
