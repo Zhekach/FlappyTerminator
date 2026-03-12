@@ -4,9 +4,9 @@
 public class Bullet : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _speed;
+    [SerializeField] private bool _isActive;
 
     private Rigidbody2D _rigidbody;
-    private bool _isActive;
 
     private void Awake()
     {
@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour, IInteractable
     {
         if (_isActive)
             _rigidbody.linearVelocityX = _speed;
+
     }
 
     public void Activate(float speed)
