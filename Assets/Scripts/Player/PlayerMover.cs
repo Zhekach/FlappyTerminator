@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInputProvider))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
@@ -13,7 +13,9 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _minRotationZ;
     [SerializeField] private float _maxRotationZ;
     
+    private PlayerInputProvider _inputProvider;
     private CustomPlayerInput _input;
+
 
     private Quaternion _minRotation;
     private Quaternion _maxRotation;
@@ -21,21 +23,21 @@ public class PlayerMover : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _input = new CustomPlayerInput();
+        _inputProvider = GetComponent<PlayerInputProvider>();
+        _input = _inputProvider.GetPlayerInput();
+        
         _minRotation = Quaternion.Euler(0, 0, _minRotationZ);
         _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
     }
 
     private void OnEnable()
     {
-        _input.Enable();
         _input.Player.Jump.performed += OnJump;
     }
 
     private void OnDisable()
     {
         _input.Player.Jump.performed -= OnJump;
-        _input.Disable();
     }
 
     private void FixedUpdate()

@@ -1,19 +1,24 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMover))]
+[RequireComponent(typeof(PlayerShooter))]
 [RequireComponent(typeof(PlayerCollisionHandler))]
 [RequireComponent(typeof(PlayerKillsCounter))]
+[RequireComponent(typeof(Weapon))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerMover _mover;
     [SerializeField] private PlayerCollisionHandler _collisionHandler;
     [SerializeField] private PlayerKillsCounter _killsCounter;
-
+    [SerializeField] private PlayerShooter _shooter;
+    [SerializeField] private Weapon _weapon;
+    
     private void Awake()
     {
         _mover = GetComponent<PlayerMover>();
         _collisionHandler = GetComponent<PlayerCollisionHandler>();
+        _killsCounter = GetComponent<PlayerKillsCounter>();
+        _weapon = GetComponent<Weapon>();
     }
 
     private void OnEnable()
@@ -24,6 +29,11 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         _collisionHandler.CollisionDetected -= HandleCollision;
+    }
+
+    public void Initialize(BulletsPool bulletsPool)
+    {
+        _weapon.Initialize(bulletsPool, _shooter.BulletSpeed);
     }
 
     public void Reset()
