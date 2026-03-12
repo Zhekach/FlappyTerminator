@@ -17,7 +17,6 @@ public class Bullet : MonoBehaviour, IInteractable
     {
         if (_isActive)
             _rigidbody.linearVelocityX = _speed;
-
     }
 
     public void Activate(float speed)

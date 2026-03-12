@@ -1,6 +1,6 @@
 ﻿    using UnityEngine;
 
-    public class EnemyGenerator : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour
     {
         
     }

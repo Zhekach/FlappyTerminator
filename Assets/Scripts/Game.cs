@@ -3,7 +3,7 @@
 public class Game : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private EnemyGenerator _enemyGenerator;
+    [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Bullet _bulletPrefab;
     
     private BulletsPool _bulletsPool;
@@ -13,7 +13,7 @@ public class Game : MonoBehaviour
         if (_player == null)
             Debug.LogError($"{gameObject.name}: _player reference is null");
         
-        if (_enemyGenerator == null)
+        if (_enemySpawner == null)
             Debug.LogError($"{gameObject.name}: _enemyGenerator reference is null");
         
         if(_bulletPrefab == null)
