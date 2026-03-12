@@ -4,7 +4,6 @@
 public class Bullet : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _speed;
-    [SerializeField] private bool _isActive;
 
     private Rigidbody2D _rigidbody;
 
@@ -13,21 +12,15 @@ public class Bullet : MonoBehaviour, IInteractable
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
-    {
-        if (_isActive)
-            _rigidbody.linearVelocityX = _speed;
-    }
-
     public void Activate(float speed)
     {
         _speed = speed;
-        _isActive = true;
+        _rigidbody.linearVelocity = (Vector2)transform.right * _speed;
     }
 
     public void ResetState()
     {
-        _isActive = false;
         _speed = 0f;
+        _rigidbody.linearVelocity = Vector2.zero;
     }
 }
