@@ -17,9 +17,6 @@ public class PlayerShooter : MonoBehaviour, IKillSource
     private Coroutine _reloadingCoroutine;
     private WaitForSeconds _reloadingDelay;
     private bool _isReloading;
-    
-    public float BulletSpeed => _bulletSpeed;
-    public int BulletDamage => _bulletDamage;
 
     private void Awake()
     {
@@ -37,6 +34,11 @@ public class PlayerShooter : MonoBehaviour, IKillSource
     private void OnDisable()
     {
         _input.Player.Fire.performed -= OnShoot;
+    }
+
+    public void Initialize(Pool<Bullet> bulletPool)
+    {
+        _weapon.Initialize(bulletPool, _bulletSpeed, _bulletDamage, this);
     }
 
     private void OnShoot(InputAction.CallbackContext context)

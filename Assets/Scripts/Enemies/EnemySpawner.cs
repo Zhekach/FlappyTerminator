@@ -5,25 +5,56 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<EnemyPoint> _points;
     [SerializeField] private float _spawnDelay;
-    [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private Enemy _enemyPrefab;
 
-    private Pool<Enemy> _pool;
+    private Pool<Enemy> _enemiesPool;
+    private Pool<Bullet> _bulletsPool;
+    private float _timer;
 
     private void Awake()
     {
-        _pool = new Pool<Enemy>(_enemyPrefab);
+        _enemiesPool = new Pool<Enemy>(_enemyPrefab);
+        _enemiesPool.Initialize();
     }
 
-    //TODO добавить сюда таймер
     private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer < _spawnDelay)
+            return;
+
+        _timer = 0f;
+
+        TrySpawn();
+    }
+
+    public void Initialize(Pool<Bullet> bulletsPool)
+    {
+        _bulletsPool = bulletsPool;
+    }
+
+    private void TrySpawn()
+    {
+        var freePoint = GetFreePoint();
+
+        if (freePoint == null)
+            return;
+
+        var enemy = _enemiesPool.Get();
+        enemy.Initialize(_enemiesPool, _bulletsPool);
+        freePoint.SetEnemy(enemy);
+        _timer = 0f;
+    }
+
+    private EnemyPoint GetFreePoint()
     {
         foreach (var point in _points)
         {
             if (point.IsEmpty())
-                point.SetEnemy(_pool.Get());
+                return point;
         }
+
+        return null;
     }
-    
-    
 }

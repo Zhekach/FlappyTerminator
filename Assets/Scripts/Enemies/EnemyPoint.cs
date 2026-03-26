@@ -2,22 +2,37 @@
 
 public class EnemyPoint : MonoBehaviour
 {
-    private Enemy _enemy;
+    private Enemy _currentEnemy;
 
-    public Enemy Enemy => _enemy;
+    public bool IsEmpty() => _currentEnemy == null;
 
     public void SetEnemy(Enemy enemy)
     {
-        _enemy = enemy;
+        if (_currentEnemy != null)
+        {
+            Debug.LogError("Point already occupied");
+            return;
+        }
+
+        _currentEnemy = enemy;
+        _currentEnemy.transform.SetParent(transform);
+        _currentEnemy.transform.localPosition = Vector3.zero;
+        
+        _currentEnemy.Despawned += OnEnemyDespawned;
     }
 
-    public bool IsEmpty()
+    private void OnEnemyDespawned()
     {
-        return _enemy == null;
+        _currentEnemy.Despawned -= OnEnemyDespawned;
+        _currentEnemy = null;
     }
 
-    public void ResetState()
+    private void OnDisable()
     {
-        _enemy = null;
+        if (_currentEnemy != null)
+        {
+            _currentEnemy.Despawned -= OnEnemyDespawned;
+            _currentEnemy = null;
+        }
     }
 }

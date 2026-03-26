@@ -1,28 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(EnemyShooter))]
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(Weapon))]
-public class Enemy : MonoBehaviour, IKillSource, IPoolable
+public class Enemy : MonoBehaviour, IPoolable
 {
     [SerializeField] private EnemyShooter _shooter;
     [SerializeField] private Health _health;
     
-    public Health  Health => _health; 
+    private Pool<Enemy> _pool;
 
+    public event Action Despawned;
+    
     private void Awake()
     {
         _shooter = GetComponent<EnemyShooter>();
         _health = GetComponent<Health>();
     }
 
+    public void Initialize(Pool<Enemy> enemiesPool, Pool<Bullet> bulletsPool)
+    {
+        _pool = enemiesPool;
+        _shooter.Initialize(bulletsPool);
+    }
+    
     public void OnSpawn()
     {
-        Debug.Log("Enemy On Spawn");
+        _health.Died += OnDied;
+        _shooter.Activate();
     }
 
     public void OnDespawn()
     {
-        Debug.Log("Enemy On Despawn");
+        _health.Died -= OnDied;
+        _shooter.Deactivate();
+    }
+
+    private void OnDied(IKillSource killer)
+    {
+        _pool.Release(this);
+        Despawned?.Invoke();
     }
 }

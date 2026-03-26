@@ -26,28 +26,7 @@ public class Game : MonoBehaviour
         _bulletsPool.Initialize();
         
         _player.Initialize(_bulletsPool);
-    }
-
-    private void OnEnable()
-    {
-        RegisterEnemy(_enemy.Health);
-    }
-
-    private void RegisterEnemy(Health enemy)
-    {
-        enemy.Died += OnEnemyDied;
-    }
-    
-    //TODO Не забыть отписаться
-    private void UnregisterEnemy(Health enemy)
-    {
-        enemy.Died -= OnEnemyDied;
-    }
-
-    private void OnEnemyDied(IKillSource killer)
-    {
         
-        if (killer is PlayerShooter)
-            Debug.Log("Enemy killed");
+        _enemySpawner.Initialize(_bulletsPool);
     }
 }
