@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInputProvider))]
 [RequireComponent(typeof(Weapon))]
-public class PlayerShooter : MonoBehaviour
+public class PlayerShooter : MonoBehaviour, IKillSource
 {
     [SerializeField] private float _bulletSpeed = 3f;
+    [SerializeField] private int _bulletDamage = 1;
     [SerializeField] private float _delayBetweenShoots = 1f;
 
     private Weapon _weapon;
@@ -18,6 +19,7 @@ public class PlayerShooter : MonoBehaviour
     private bool _isReloading;
     
     public float BulletSpeed => _bulletSpeed;
+    public int BulletDamage => _bulletDamage;
 
     private void Awake()
     {

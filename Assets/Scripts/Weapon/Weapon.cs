@@ -5,28 +5,33 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private float _xOffset;
 
-    private float _bulletsSpeed;
-    private BulletsPool _bulletsPool;
     private Rigidbody2D _rigidbody;
+    
+    private float _speed;
+    private int _damage;
+    private BulletsPool _pool;
+    private IKillSource _owner;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(BulletsPool bulletsPool, float bulletSpeed)
+    public void Initialize(BulletsPool bulletsPool, float bulletSpeed, int damage, IKillSource owner)
     {
-        _bulletsPool = bulletsPool;
-        _bulletsSpeed = bulletSpeed;
+        _pool = bulletsPool;
+        _speed = bulletSpeed;
+        _damage = damage;
+        _owner = owner;
     }
 
     public void Shoot()
     {
-        var bullet = _bulletsPool.Get();
+        var bullet = _pool.Get();
         var position = _rigidbody.position;
         position.x += _xOffset;
         bullet.transform.position = position;
         bullet.transform.rotation = transform.rotation;
-        bullet.Activate(_bulletsSpeed);
+        bullet.Activate(_speed, _damage, _owner);
     }
 }

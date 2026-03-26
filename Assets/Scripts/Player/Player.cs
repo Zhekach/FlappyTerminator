@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerKillsCounter _killsCounter;
     [SerializeField] private PlayerShooter _shooter;
     [SerializeField] private Weapon _weapon;
-    
+
     private void Awake()
     {
         _mover = GetComponent<PlayerMover>();
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     {
         _collisionHandler.CollisionDetected += HandleCollision;
     }
-    
+
     private void OnDisable()
     {
         _collisionHandler.CollisionDetected -= HandleCollision;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     public void Initialize(BulletsPool bulletsPool)
     {
-        _weapon.Initialize(bulletsPool, _shooter.BulletSpeed);
+        _weapon.Initialize(bulletsPool, _shooter.BulletSpeed, _shooter.BulletDamage, _shooter);
     }
 
     public void Reset()
@@ -45,12 +45,6 @@ public class Player : MonoBehaviour
     private void HandleCollision(IInteractable interactable)
     {
         if (interactable is Ground)
-        {
             Debug.Log("Ground");
-        }
-        else if (interactable is Bullet)
-        {
-            Debug.Log("Bullet");
-        }
     }
 }
