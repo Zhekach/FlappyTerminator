@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     
     private float _speed;
     private int _damage;
-    private BulletsPool _pool;
+    private Pool<Bullet> _pool;
     private IKillSource _owner;
 
     private void Awake()
@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(BulletsPool bulletsPool, float bulletSpeed, int damage, IKillSource owner)
+    public void Initialize(Pool<Bullet> bulletsPool, float bulletSpeed, int damage, IKillSource owner)
     {
         _pool = bulletsPool;
         _speed = bulletSpeed;

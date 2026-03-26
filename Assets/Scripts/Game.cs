@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
     //TEST
     [SerializeField] private Enemy _enemy;
     
-    private BulletsPool _bulletsPool;
+    private Pool<Bullet> _bulletsPool;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class Game : MonoBehaviour
         if(_bulletPrefab == null)
             Debug.LogError($"{gameObject.name}: bulletPrefab is null");
         
-        _bulletsPool = new BulletsPool(_bulletPrefab);
+        _bulletsPool = new Pool<Bullet>(_bulletPrefab);
         _bulletsPool.Initialize();
         
         _player.Initialize(_bulletsPool);

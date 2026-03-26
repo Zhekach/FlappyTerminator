@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPoolable
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
@@ -39,5 +39,15 @@ public class Bullet : MonoBehaviour
     private void OnHit(IDamageable target)
     {
         target.TakeDamage(_damage, _owner);
+    }
+
+    public void OnSpawn()
+    {
+        Debug.Log("Bullet OnSpawn");
+    }
+
+    public void OnDespawn()
+    {
+        Debug.Log("Bullet OnDespawn");
     }
 }
