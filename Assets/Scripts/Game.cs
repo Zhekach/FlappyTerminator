@@ -7,9 +7,6 @@ public class Game : MonoBehaviour
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private ScoresCounter _scoresCounter;
     
-    //TEST
-    [SerializeField] private Enemy _enemy;
-    
     private Pool<Bullet> _bulletsPool;
 
     private void Awake()
@@ -27,10 +24,9 @@ public class Game : MonoBehaviour
             Debug.LogError($"{gameObject.name}: scoresCounter is null");
         
         _bulletsPool = new Pool<Bullet>(_bulletPrefab);
+        
         _bulletsPool.Initialize();
-        
         _player.Initialize(_bulletsPool);
-        
         _enemySpawner.Initialize(_bulletsPool);
     }
 }

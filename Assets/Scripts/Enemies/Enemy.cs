@@ -8,9 +8,7 @@ public class Enemy : MonoBehaviour, IPoolable
     [SerializeField] private EnemyShooter _shooter;
     [SerializeField] private Health _health;
     
-    private Pool<Enemy> _pool;
-
-    public event Action Despawned;
+    public event Action<Enemy> Died;
     
     private void Awake()
     {
@@ -18,9 +16,8 @@ public class Enemy : MonoBehaviour, IPoolable
         _health = GetComponent<Health>();
     }
 
-    public void Initialize(Pool<Enemy> enemiesPool, Pool<Bullet> bulletsPool)
+    public void Initialize(Pool<Bullet> bulletsPool)
     {
-        _pool = enemiesPool;
         _shooter.Initialize(bulletsPool);
     }
     
@@ -34,19 +31,8 @@ public class Enemy : MonoBehaviour, IPoolable
         _health.Died -= OnDied;
     }
 
-    public void Activate()
-    {
-        _shooter.Activate();
-    }
-
-    public void Deactivate()
-    {
-        _shooter.Deactivate();
-    }
-
     private void OnDied()
     {
-        _pool.Release(this);
-        Despawned?.Invoke();
+        Died?.Invoke(this);
     }
 }

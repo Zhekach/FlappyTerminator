@@ -27,6 +27,9 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
+        if(_pool == null)
+            return;
+        
         var bullet = _pool.Get();
         var position = _rigidbody.position;
         position.x += _xOffset;

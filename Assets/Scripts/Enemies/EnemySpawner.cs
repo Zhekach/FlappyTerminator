@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -39,25 +40,33 @@ public class EnemySpawner : MonoBehaviour
 
     private void TrySpawn()
     {
-        var freePoint = GetFreePoint();
+        var point = GetRandomPoint();
 
-        if (freePoint == null)
+        if (point == null)
             return;
-
-        Enemy enemy = _enemiesPool.Get();
-        enemy.Initialize(_enemiesPool, _bulletsPool);
-        freePoint.SetEnemy(enemy);
+        
+        Spawn(point);
         _timer = 0f;
     }
 
-    private EnemyPoint GetFreePoint()
+    private void Spawn(EnemyPoint point)
     {
-        foreach (var point in _points)
-        {
-            if (point.IsEmpty())
-                return point;
-        }
+        Enemy enemy = _enemiesPool.Get();
+        enemy.Initialize(_bulletsPool);
+        point.SetEnemy(enemy);
+        enemy.Died += OnEnemyDied;
+    }
 
-        return null;
+    private void OnEnemyDied(Enemy enemy)
+    {
+        _enemiesPool.Release(enemy);
+    }
+
+    private EnemyPoint GetRandomPoint()
+    {
+        int randomIndex = Random.Range(0, _points.Count);
+        EnemyPoint result = _points[randomIndex];
+        
+        return result;
     }
 }
