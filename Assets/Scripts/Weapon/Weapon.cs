@@ -9,26 +9,26 @@ public class Weapon : MonoBehaviour
     
     private float _speed;
     private int _damage;
-    private Pool<Bullet> _pool;
+    private BulletsSpawner _bulletsSpawner;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool, float bulletSpeed, int damage)
+    public void Initialize(BulletsSpawner bulletsSpawner, float bulletSpeed, int damage)
     {
-        _pool = bulletsPool;
+        _bulletsSpawner = bulletsSpawner;
         _speed = bulletSpeed;
         _damage = damage;
     }
 
     public void Shoot()
     {
-        if(_pool == null)
+        if(_bulletsSpawner == null)
             return;
         
-        var bullet = _pool.Get();
+        var bullet = _bulletsSpawner.GetBullet();
         var position = _rigidbody.position;
         position.x += _xOffset;
         bullet.transform.position = position;

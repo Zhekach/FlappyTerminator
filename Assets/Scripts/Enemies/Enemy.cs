@@ -16,9 +16,9 @@ public class Enemy : MonoBehaviour, IPoolable
         _health = GetComponent<Health>();
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool)
+    public void Initialize(BulletsSpawner bulletsSpawner)
     {
-        _shooter.Initialize(bulletsPool);
+        _shooter.Initialize(bulletsSpawner);
     }
     
     public void OnSpawn()

@@ -18,7 +18,6 @@ public class OutOfBoundsDetector : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
-            Debug.Log("Enemy out of borders");
             DetectedEnemy?.Invoke(enemy);
         }
         

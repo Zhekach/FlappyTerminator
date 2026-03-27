@@ -7,7 +7,8 @@ public class Game : MonoBehaviour
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private ScoresCounter _scoresCounter;
     [SerializeField] private OutOfBoundsDetector _outOfBoundsDetector;
-    
+
+    private BulletsSpawner _bulletsSpawner;
     private Pool<Bullet> _bulletsPool;
 
     private void Awake()
@@ -28,10 +29,11 @@ public class Game : MonoBehaviour
             Debug.LogError($"{gameObject.name}: outOfBoundsDetector is null");
         
         _bulletsPool = new Pool<Bullet>(_bulletPrefab);
+        _bulletsSpawner = new BulletsSpawner(_bulletsPool, _outOfBoundsDetector);
         
         _bulletsPool.Initialize();
-        _player.Initialize(_bulletsPool);
-        _enemySpawner.Initialize(_bulletsPool, _outOfBoundsDetector);
+        _player.Initialize(_bulletsSpawner);
+        _enemySpawner.Initialize(_bulletsSpawner, _outOfBoundsDetector);
         _scoresCounter.Initialize(_enemySpawner);
     }
 }

@@ -25,9 +25,9 @@ public class Player : MonoBehaviour
         _collisionHandler.CollisionDetected -= HandleCollision;
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool)
+    public void Initialize(BulletsSpawner bulletsSpawner)
     {
-        _shooter.Initialize(bulletsPool);
+        _shooter.Initialize(bulletsSpawner);
     }
 
     public void Reset()

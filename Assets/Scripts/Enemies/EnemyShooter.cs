@@ -16,9 +16,9 @@ public class EnemyShooter : MonoBehaviour
         _weapon = GetComponent<Weapon>();
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool)
+    public void Initialize(BulletsSpawner bulletsSpawner)
     {
-        _weapon.Initialize(bulletsPool, _speed, _damage);
+        _weapon.Initialize(bulletsSpawner, _speed, _damage);
     }
 
     private void OnEnable()

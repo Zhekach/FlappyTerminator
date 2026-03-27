@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Enemy _enemyPrefab;
     
     private Pool<Enemy> _enemiesPool;
-    private Pool<Bullet> _bulletsPool;
+    private BulletsSpawner _bulletsSpawner;
     private OutOfBoundsDetector _outOfBoundsDetector;
     
     private float _timer;
@@ -35,9 +35,9 @@ public class EnemySpawner : MonoBehaviour
         TrySpawn();
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool, OutOfBoundsDetector outOfBoundsDetector)
+    public void Initialize(BulletsSpawner bulletsSpawner, OutOfBoundsDetector outOfBoundsDetector)
     {
-        _bulletsPool = bulletsPool;
+        _bulletsSpawner = bulletsSpawner;
         _outOfBoundsDetector = outOfBoundsDetector;
         _outOfBoundsDetector.DetectedEnemy += OnEnemyOutOfBorders;
     }
@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
     private void Spawn(EnemyPoint point)
     {
         Enemy enemy = _enemiesPool.Get();
-        enemy.Initialize(_bulletsPool);
+        enemy.Initialize(_bulletsSpawner);
         point.SetEnemy(enemy);
         enemy.Died += OnEnemyDied;
     }

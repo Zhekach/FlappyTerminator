@@ -36,9 +36,9 @@ public class PlayerShooter : MonoBehaviour
         _input.Player.Fire.performed -= OnShoot;
     }
 
-    public void Initialize(Pool<Bullet> bulletPool)
+    public void Initialize(BulletsSpawner bulletsSpawner)
     {
-        _weapon.Initialize(bulletPool, _bulletSpeed, _bulletDamage);
+        _weapon.Initialize(bulletsSpawner, _bulletSpeed, _bulletDamage);
     }
 
     private void OnShoot(InputAction.CallbackContext context)
