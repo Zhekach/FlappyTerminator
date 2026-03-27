@@ -40,7 +40,6 @@ public class Pool<T> where T : Component, IPoolable
 
     private void OnGet(T obj)
     {
-        obj.gameObject.SetActive(true);
         obj.OnSpawn();
     }
 

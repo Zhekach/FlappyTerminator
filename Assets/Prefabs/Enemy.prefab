@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2003830c1ac4487b5a34834c18d9ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
-  _delay: 0.5
+  _delay: 1
   _speed: -1
   _damage: 1
   _weapon: {fileID: 0}

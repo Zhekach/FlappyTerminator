@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private float _timer;
 
     public event Action EnemyKilled;
+    public event Action EnemyPassed;
     
     private void Awake()
     {
@@ -63,13 +64,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDied(Enemy enemy)
     {
+        enemy.Died -= OnEnemyDied;
         _enemiesPool.Release(enemy);
         EnemyKilled?.Invoke();
     }
 
     private void OnEnemyOutOfBorders(Enemy enemy)
     {
+        enemy.Died -= OnEnemyDied;
+        
+        if(enemy.gameObject.activeSelf == false)
+            return;
+        
         _enemiesPool.Release(enemy);
+        EnemyPassed?.Invoke();
     }
 
     private EnemyPoint GetRandomPoint()

@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
-public class Game : MonoBehaviour
+public class GameInstaller : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private ScoresCounter _scoresCounter;
     [SerializeField] private OutOfBoundsDetector _outOfBoundsDetector;
+    
+    [SerializeField] private ScoresCounterView _scoresCounterView;
 
     private BulletsSpawner _bulletsSpawner;
     private Pool<Bullet> _bulletsPool;
@@ -35,5 +37,10 @@ public class Game : MonoBehaviour
         _player.Initialize(_bulletsSpawner);
         _enemySpawner.Initialize(_bulletsSpawner, _outOfBoundsDetector);
         _scoresCounter.Initialize(_enemySpawner);
+        
+        _scoresCounterView.Initialize(_scoresCounter);
+        
+        //TODO add game Flow
+        _scoresCounter.ResetState();
     }
 }
