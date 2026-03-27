@@ -44,11 +44,9 @@ public class Bullet : MonoBehaviour, IPoolable
 
     public void OnSpawn()
     {
-        Debug.Log("Bullet OnSpawn");
     }
 
     public void OnDespawn()
     {
-        Debug.Log("Bullet OnDespawn");
     }
 }

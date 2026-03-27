@@ -60,6 +60,7 @@ public class EnemySpawner : MonoBehaviour
     private void OnEnemyDied(Enemy enemy)
     {
         _enemiesPool.Release(enemy);
+        EnemyKilled?.Invoke();
     }
 
     private EnemyPoint GetRandomPoint()

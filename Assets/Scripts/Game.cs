@@ -28,5 +28,6 @@ public class Game : MonoBehaviour
         _bulletsPool.Initialize();
         _player.Initialize(_bulletsPool);
         _enemySpawner.Initialize(_bulletsPool);
+        _scoresCounter.Initialize(_enemySpawner);
     }
 }

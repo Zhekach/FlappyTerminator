@@ -119,6 +119,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &371932557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371932559}
+  - component: {fileID: 371932558}
+  m_Layer: 0
+  m_Name: ScoresCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371932558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371932557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13e3910d4e8491ab2d856f2adfa3976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoresCounter
+  _scoresPerEnemyKill: 2
+--- !u!4 &371932559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371932557}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.20505, y: 5.18504, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +849,6 @@ GameObject:
   - component: {fileID: 1172157836}
   - component: {fileID: 1172157828}
   - component: {fileID: 1172157833}
-  - component: {fileID: 1172157834}
   - component: {fileID: 1172157835}
   - component: {fileID: 1172157827}
   - component: {fileID: 1172157832}
@@ -875,7 +919,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bird
   _mover: {fileID: 1172157828}
   _collisionHandler: {fileID: 1172157833}
-  _killsCounter: {fileID: 1172157834}
   _shooter: {fileID: 1172157836}
 --- !u!212 &1172157830
 SpriteRenderer:
@@ -1000,18 +1043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a338cc8a30b449c88b09eea8d94a52b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionHandler
---- !u!114 &1172157834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172157826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c0125c93f2407a87f4506781adee5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerKillsCounter
 --- !u!114 &1172157835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,7 +1115,7 @@ MonoBehaviour:
   _player: {fileID: 1172157829}
   _enemySpawner: {fileID: 1132593277}
   _bulletPrefab: {fileID: 7674347962712396949, guid: 0cda7d5c1bd9fa34c8167abdc9fe6d27, type: 3}
-  _enemy: {fileID: 0}
+  _scoresCounter: {fileID: 371932558}
 --- !u!4 &1794005111
 Transform:
   m_ObjectHideFlags: 0
@@ -1189,3 +1220,4 @@ SceneRoots:
   - {fileID: 2027564887}
   - {fileID: 1794005111}
   - {fileID: 1132593278}
+  - {fileID: 371932559}
