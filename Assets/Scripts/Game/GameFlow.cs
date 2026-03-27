@@ -25,11 +25,11 @@ public class GameFlow
     public void GameOver()
     {
         SetState(GameState.GameOver);
-        Time.timeScale = 0;
     }
     
     private void SetState(GameState state)
     {
         _gameState = state;
+        GameStateChanged?.Invoke(_gameState);
     }
 }

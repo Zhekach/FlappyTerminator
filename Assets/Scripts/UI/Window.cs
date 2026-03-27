@@ -6,6 +6,8 @@ public abstract class Window : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button _button;
     
+    protected GameFlow GameFlow;
+    
     public CanvasGroup CanvasGroup => _canvasGroup;
     public Button Button => _button;
 
@@ -19,9 +21,14 @@ public abstract class Window : MonoBehaviour
         _button.onClick.RemoveListener(OnButtonClick);
     }
 
+    public void Initialize(GameFlow gameFlow)
+    {
+        GameFlow = gameFlow;
+    }
+    
     protected abstract void OnButtonClick();
     
-    protected abstract void Open();
+    protected abstract void Open(GameState gameState);
     
-    protected abstract void Close();
+    protected abstract void Close(GameState gameState);
 }

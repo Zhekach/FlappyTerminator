@@ -10,6 +10,7 @@ public class GameInstaller : MonoBehaviour
     [SerializeField] private OutOfBoundsDetector _outOfBoundsDetector;
     
     [SerializeField] private ScoresCounterView _scoresCounterView;
+    [SerializeField] private EndWindow _endWindow;
 
     private GameFlow _gameFlow;
     private BulletsSpawner _bulletsSpawner;
@@ -45,6 +46,7 @@ public class GameInstaller : MonoBehaviour
         _playerDeathHandler = new PlayerDeathHandler(_player, _gameFlow);
         
         _scoresCounterView.Initialize(_scoresCounter);
+        _endWindow.Initialize(_gameFlow);
         
         
         //TODO add game Flow
