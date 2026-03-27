@@ -10,19 +10,17 @@ public class Weapon : MonoBehaviour
     private float _speed;
     private int _damage;
     private Pool<Bullet> _pool;
-    private IKillSource _owner;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool, float bulletSpeed, int damage, IKillSource owner)
+    public void Initialize(Pool<Bullet> bulletsPool, float bulletSpeed, int damage)
     {
         _pool = bulletsPool;
         _speed = bulletSpeed;
         _damage = damage;
-        _owner = owner;
     }
 
     public void Shoot()

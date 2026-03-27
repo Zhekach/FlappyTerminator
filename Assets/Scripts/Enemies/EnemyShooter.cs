@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Weapon))]
-public class EnemyShooter : MonoBehaviour, IKillSource
+public class EnemyShooter : MonoBehaviour
 {
     [SerializeField] private float _delay;
     [SerializeField] private float _speed;
@@ -18,7 +18,7 @@ public class EnemyShooter : MonoBehaviour, IKillSource
 
     public void Initialize(Pool<Bullet> bulletsPool)
     {
-        _weapon.Initialize(bulletsPool, _speed, _damage, this);
+        _weapon.Initialize(bulletsPool, _speed, _damage);
     }
 
     private void OnEnable()

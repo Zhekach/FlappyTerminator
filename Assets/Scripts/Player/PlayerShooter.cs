@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInputProvider))]
 [RequireComponent(typeof(Weapon))]
-public class PlayerShooter : MonoBehaviour, IKillSource
+public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed = 3f;
     [SerializeField] private int _bulletDamage = 1;
@@ -38,7 +38,7 @@ public class PlayerShooter : MonoBehaviour, IKillSource
 
     public void Initialize(Pool<Bullet> bulletPool)
     {
-        _weapon.Initialize(bulletPool, _bulletSpeed, _bulletDamage, this);
+        _weapon.Initialize(bulletPool, _bulletSpeed, _bulletDamage);
     }
 
     private void OnShoot(InputAction.CallbackContext context)
