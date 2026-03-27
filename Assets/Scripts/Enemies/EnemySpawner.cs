@@ -8,9 +8,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<EnemyPoint> _points;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private Enemy _enemyPrefab;
-
+    
     private Pool<Enemy> _enemiesPool;
     private Pool<Bullet> _bulletsPool;
+    private OutOfBoundsDetector _outOfBoundsDetector;
+    
     private float _timer;
 
     public event Action EnemyKilled;
@@ -33,9 +35,11 @@ public class EnemySpawner : MonoBehaviour
         TrySpawn();
     }
 
-    public void Initialize(Pool<Bullet> bulletsPool)
+    public void Initialize(Pool<Bullet> bulletsPool, OutOfBoundsDetector outOfBoundsDetector)
     {
         _bulletsPool = bulletsPool;
+        _outOfBoundsDetector = outOfBoundsDetector;
+        _outOfBoundsDetector.DetectedEnemy += OnEnemyOutOfBorders;
     }
 
     private void TrySpawn()
@@ -61,6 +65,11 @@ public class EnemySpawner : MonoBehaviour
     {
         _enemiesPool.Release(enemy);
         EnemyKilled?.Invoke();
+    }
+
+    private void OnEnemyOutOfBorders(Enemy enemy)
+    {
+        _enemiesPool.Release(enemy);
     }
 
     private EnemyPoint GetRandomPoint()

@@ -6,9 +6,6 @@ public class Bullet : MonoBehaviour, IPoolable
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
-    
-    //TODO remove if dont need
-    private IKillSource _owner;
 
     private Rigidbody2D _rigidbody;
 
@@ -17,11 +14,10 @@ public class Bullet : MonoBehaviour, IPoolable
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Activate(float speed, int damage,  IKillSource owner)
+    public void Activate(float speed, int damage)
     {
         _speed = speed;
         _damage = damage;
-        _owner = owner;
         _rigidbody.linearVelocity = (Vector2)transform.right * _speed;
     }
 

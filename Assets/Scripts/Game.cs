@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private ScoresCounter _scoresCounter;
+    [SerializeField] private OutOfBoundsDetector _outOfBoundsDetector;
     
     private Pool<Bullet> _bulletsPool;
 
@@ -23,11 +24,14 @@ public class Game : MonoBehaviour
         if (_scoresCounter == null)
             Debug.LogError($"{gameObject.name}: scoresCounter is null");
         
+        if (_outOfBoundsDetector == null)
+            Debug.LogError($"{gameObject.name}: outOfBoundsDetector is null");
+        
         _bulletsPool = new Pool<Bullet>(_bulletPrefab);
         
         _bulletsPool.Initialize();
         _player.Initialize(_bulletsPool);
-        _enemySpawner.Initialize(_bulletsPool);
+        _enemySpawner.Initialize(_bulletsPool, _outOfBoundsDetector);
         _scoresCounter.Initialize(_enemySpawner);
     }
 }

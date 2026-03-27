@@ -35,6 +35,6 @@ public class Weapon : MonoBehaviour
         position.x += _xOffset;
         bullet.transform.position = position;
         bullet.transform.rotation = transform.rotation;
-        bullet.Activate(_speed, _damage, _owner);
+        bullet.Activate(_speed, _damage);
     }
 }
