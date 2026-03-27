@@ -41,12 +41,12 @@ public class Pool<T> where T : Component, IPoolable
     private void OnGet(T obj)
     {
         obj.gameObject.SetActive(true);
-        obj.OnSpawn(); // ключевой момент
+        obj.OnSpawn();
     }
 
     private void OnRelease(T obj)
     {
-        obj.OnDespawn(); // ключевой момент
+        obj.OnDespawn();
         obj.gameObject.SetActive(false);
     }
 

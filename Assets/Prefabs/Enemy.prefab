@@ -64,6 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2003830c1ac4487b5a34834c18d9ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
+  _delay: 0.5
+  _speed: -1
+  _damage: 1
+  _weapon: {fileID: 0}
 --- !u!114 &3925549196710836252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4db394b8aeb405f93d345fea48b47f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  _xOffset: 0
+  _xOffset: -0.5
 --- !u!212 &8482005617339268529
 SpriteRenderer:
   serializedVersion: 2

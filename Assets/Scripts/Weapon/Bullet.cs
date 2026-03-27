@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour, IPoolable
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     
+    //TODO remove if dont need
     private IKillSource _owner;
 
     private Rigidbody2D _rigidbody;
@@ -38,7 +39,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
     private void OnHit(IDamageable target)
     {
-        target.TakeDamage(_damage, _owner);
+        target.TakeDamage(_damage);
     }
 
     public void OnSpawn()

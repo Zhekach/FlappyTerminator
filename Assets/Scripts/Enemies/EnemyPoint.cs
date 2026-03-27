@@ -15,14 +15,15 @@ public class EnemyPoint : MonoBehaviour
         }
 
         _currentEnemy = enemy;
-        _currentEnemy.transform.SetParent(transform);
-        _currentEnemy.transform.localPosition = Vector3.zero;
-        
+        //_currentEnemy.transform.SetParent(transform);
+        _currentEnemy.transform.localPosition = transform.position;
+        _currentEnemy.Activate();
         _currentEnemy.Despawned += OnEnemyDespawned;
     }
 
     private void OnEnemyDespawned()
     {
+        _currentEnemy.Deactivate();
         _currentEnemy.Despawned -= OnEnemyDespawned;
         _currentEnemy = null;
     }
@@ -31,6 +32,7 @@ public class EnemyPoint : MonoBehaviour
     {
         if (_currentEnemy != null)
         {
+            _currentEnemy.Deactivate();
             _currentEnemy.Despawned -= OnEnemyDespawned;
             _currentEnemy = null;
         }

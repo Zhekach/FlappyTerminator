@@ -33,8 +33,7 @@ public class EnemyShooter : MonoBehaviour, IKillSource
             return;
 
         _isActive = true;
-
-        // Запускаем стрельбу
+        
         _shootRoutine = StartCoroutine(ShootRoutine());
     }
 

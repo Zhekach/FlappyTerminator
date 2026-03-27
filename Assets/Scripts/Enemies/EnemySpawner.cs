@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -11,6 +12,8 @@ public class EnemySpawner : MonoBehaviour
     private Pool<Bullet> _bulletsPool;
     private float _timer;
 
+    public event Action EnemyKilled;
+    
     private void Awake()
     {
         _enemiesPool = new Pool<Enemy>(_enemyPrefab);
@@ -41,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         if (freePoint == null)
             return;
 
-        var enemy = _enemiesPool.Get();
+        Enemy enemy = _enemiesPool.Get();
         enemy.Initialize(_enemiesPool, _bulletsPool);
         freePoint.SetEnemy(enemy);
         _timer = 0f;

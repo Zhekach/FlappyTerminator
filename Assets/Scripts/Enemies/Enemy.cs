@@ -27,16 +27,24 @@ public class Enemy : MonoBehaviour, IPoolable
     public void OnSpawn()
     {
         _health.Died += OnDied;
-        _shooter.Activate();
     }
 
     public void OnDespawn()
     {
         _health.Died -= OnDied;
+    }
+
+    public void Activate()
+    {
+        _shooter.Activate();
+    }
+
+    public void Deactivate()
+    {
         _shooter.Deactivate();
     }
 
-    private void OnDied(IKillSource killer)
+    private void OnDied()
     {
         _pool.Release(this);
         Despawned?.Invoke();

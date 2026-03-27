@@ -5,6 +5,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private ScoresCounter _scoresCounter;
     
     //TEST
     [SerializeField] private Enemy _enemy;
@@ -21,6 +22,9 @@ public class Game : MonoBehaviour
         
         if(_bulletPrefab == null)
             Debug.LogError($"{gameObject.name}: bulletPrefab is null");
+        
+        if (_scoresCounter == null)
+            Debug.LogError($"{gameObject.name}: scoresCounter is null");
         
         _bulletsPool = new Pool<Bullet>(_bulletPrefab);
         _bulletsPool.Initialize();

@@ -3,19 +3,16 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMover))]
 [RequireComponent(typeof(PlayerShooter))]
 [RequireComponent(typeof(PlayerCollisionHandler))]
-[RequireComponent(typeof(PlayerKillsCounter))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerMover _mover;
     [SerializeField] private PlayerCollisionHandler _collisionHandler;
-    [SerializeField] private PlayerKillsCounter _killsCounter;
     [SerializeField] private PlayerShooter _shooter;
 
     private void Awake()
     {
         _mover = GetComponent<PlayerMover>();
         _collisionHandler = GetComponent<PlayerCollisionHandler>();
-        _killsCounter = GetComponent<PlayerKillsCounter>();
     }
 
     private void OnEnable()
@@ -36,7 +33,6 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         _mover.Reset();
-        _killsCounter.Reset();
     }
 
     private void HandleCollision(IInteractable interactable)
