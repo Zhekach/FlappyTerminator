@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(EnemyShooter))]
 [RequireComponent(typeof(Health))]
-public class Enemy : MonoBehaviour, IPoolable
+public class Enemy : MonoBehaviour, IPoolable, IInteractable
 {
     [SerializeField] private EnemyShooter _shooter;
     [SerializeField] private Health _health;

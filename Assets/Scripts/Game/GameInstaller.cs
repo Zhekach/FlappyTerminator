@@ -2,6 +2,7 @@
 
 public class GameInstaller : MonoBehaviour
 {
+    
     [SerializeField] private Player _player;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Bullet _bulletPrefab;
@@ -10,8 +11,10 @@ public class GameInstaller : MonoBehaviour
     
     [SerializeField] private ScoresCounterView _scoresCounterView;
 
+    private GameFlow _gameFlow;
     private BulletsSpawner _bulletsSpawner;
     private Pool<Bullet> _bulletsPool;
+    private PlayerDeathHandler _playerDeathHandler;
 
     private void Awake()
     {
@@ -38,7 +41,11 @@ public class GameInstaller : MonoBehaviour
         _enemySpawner.Initialize(_bulletsSpawner, _outOfBoundsDetector);
         _scoresCounter.Initialize(_enemySpawner);
         
+        _gameFlow = new GameFlow();
+        _playerDeathHandler = new PlayerDeathHandler(_player, _gameFlow);
+        
         _scoresCounterView.Initialize(_scoresCounter);
+        
         
         //TODO add game Flow
         _scoresCounter.ResetState();

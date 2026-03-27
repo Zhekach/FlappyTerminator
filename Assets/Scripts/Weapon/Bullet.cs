@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<IDamageable>( out IDamageable target))
+        if(collision.TryGetComponent( out IDamageable target))
             OnHit(target);    
     }
 
