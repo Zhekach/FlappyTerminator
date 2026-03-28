@@ -91,6 +91,7 @@ public class EnemySpawner : MonoBehaviour
     {
         _activeEnemies.Remove(enemy);
         enemy.Died -= OnEnemyDied;
+        enemy.Deactivate();
         _enemiesPool.Release(enemy);
     }
 
