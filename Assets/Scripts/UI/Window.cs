@@ -3,32 +3,22 @@ using UnityEngine.UI;
 
 public abstract class Window : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private Button _button;
-    
-    protected GameFlow GameFlow;
-    
-    public CanvasGroup CanvasGroup => _canvasGroup;
-    public Button Button => _button;
+    [SerializeField] protected CanvasGroup CanvasGroup;
+    [SerializeField] protected Button Button;
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(OnButtonClick);
+        Button.onClick.AddListener(OnButtonClick);
     }
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(OnButtonClick);
-    }
-
-    public void Initialize(GameFlow gameFlow)
-    {
-        GameFlow = gameFlow;
+        Button.onClick.RemoveListener(OnButtonClick);
     }
     
     protected abstract void OnButtonClick();
     
-    protected abstract void Open(GameState gameState);
+    public abstract void Open();
     
-    protected abstract void Close(GameState gameState);
+    public abstract void Close();
 }

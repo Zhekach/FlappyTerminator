@@ -1,23 +1,23 @@
-﻿public class EndWindow : Window
+﻿using UnityEngine;
+
+public class EndWindow : Window
 {
-    private void Awake()
-    {
-        GameFlow.GameStateChanged += Open;
-    }
+    
     
     protected override void OnButtonClick()
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void Open(GameState gameState)
+    public override void Open()
     {
-        if (gameState == GameState.GameOver)
-            gameObject.SetActive(true);
+        CanvasGroup.alpha = 1f;
+        Button.interactable = true;
     }
 
-    protected override void Close(GameState gameState)
+    public override void Close()
     {
-        throw new System.NotImplementedException();
+        CanvasGroup.alpha = 0f;
+        Button.interactable = false;
     }
 }
