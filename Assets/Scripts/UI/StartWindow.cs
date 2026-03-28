@@ -1,6 +1,4 @@
-﻿
-using System;
-using UnityEngine;
+﻿using System;
 
 public class StartWindow : Window
 {
@@ -8,19 +6,16 @@ public class StartWindow : Window
     
     protected override void OnButtonClick()
     {
-        Debug.Log("START Button OnEnable");
         PlayButtonClick?.Invoke();
     }
 
     public override void Open()
     {
-        CanvasGroup.alpha = 1f;
-        Button.interactable = true;
+        gameObject.SetActive(true);
     }
 
     public override void Close()
     {
-        CanvasGroup.alpha = 0f;
-        Button.interactable = false;
+        gameObject.SetActive(false);
     }
 }

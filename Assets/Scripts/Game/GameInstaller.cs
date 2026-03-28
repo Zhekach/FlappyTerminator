@@ -57,6 +57,7 @@ public class GameInstaller : MonoBehaviour
         if (gameState == GameState.ResetGame)
         {
             _scoresCounter.ResetState();
+            _player.Reset();
         }
     }
 }

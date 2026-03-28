@@ -16,6 +16,7 @@ public class GameFlow
         _endWindow = endWindow;
         
         _startWindow.PlayButtonClick += OnPlayButtonClicked;
+        _endWindow.RestartButtonClick += OnRestartButtonClicked;
     }
     
     public void ResetGame()
@@ -30,17 +31,16 @@ public class GameFlow
     {
         SetState(GameState.Playing);
         _startWindow.Close();
+        _endWindow.Close();
         Time.timeScale = 1f;
-    }
-
-    public void PauseGame()
-    {
-        SetState(GameState.Paused);
     }
 
     public void GameOver()
     {
         SetState(GameState.GameOver);
+        _endWindow.Open();
+        _startWindow.Close();
+        Time.timeScale = 0f;
     }
     
     private void SetState(GameState state)
@@ -52,5 +52,10 @@ public class GameFlow
     private void OnPlayButtonClicked()
     {
         StartGame();
+    }
+    
+    private void OnRestartButtonClicked()
+    {
+        ResetGame();
     }
 }

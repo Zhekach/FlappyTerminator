@@ -3,13 +3,11 @@ using UnityEngine.UI;
 
 public abstract class Window : MonoBehaviour
 {
-    [SerializeField] protected CanvasGroup CanvasGroup;
     [SerializeField] protected Button Button;
 
     private void OnEnable()
     {
         Button.onClick.AddListener(OnButtonClick);
-        Debug.Log("Button OnEnable");
     }
 
     private void OnDisable()

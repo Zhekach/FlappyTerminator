@@ -2,6 +2,5 @@
 {
     ResetGame,
     Playing,
-    Paused,
     GameOver,
 }

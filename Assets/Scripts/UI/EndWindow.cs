@@ -1,23 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class EndWindow : Window
 {
-    
+    public event Action RestartButtonClick;
     
     protected override void OnButtonClick()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("OnButtonClick");
+        RestartButtonClick?.Invoke();
     }
 
     public override void Open()
     {
-        CanvasGroup.alpha = 1f;
-        Button.interactable = true;
+        gameObject.SetActive(true);
     }
 
     public override void Close()
     {
-        CanvasGroup.alpha = 0f;
-        Button.interactable = false;
+        gameObject.SetActive(false);
     }
 }
