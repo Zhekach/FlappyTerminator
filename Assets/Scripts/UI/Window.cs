@@ -9,6 +9,7 @@ public abstract class Window : MonoBehaviour
     private void OnEnable()
     {
         Button.onClick.AddListener(OnButtonClick);
+        Debug.Log("Button OnEnable");
     }
 
     private void OnDisable()

@@ -14,7 +14,6 @@ public class GameFlow
     {
         _startWindow = startWindow;
         _endWindow = endWindow;
-        ResetGame();
         
         _startWindow.PlayButtonClick += OnPlayButtonClicked;
     }

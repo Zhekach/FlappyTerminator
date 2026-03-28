@@ -43,12 +43,13 @@ public class GameInstaller : MonoBehaviour
         _enemySpawner.Initialize(_bulletsSpawner, _outOfBoundsDetector);
         _scoresCounter.Initialize(_enemySpawner);
         
-        _gameFlow = new GameFlow(_endWindow, _startWindow);
-        _gameFlow.GameStateChanged += OnGameStateChanged;
-        
         _playerDeathHandler = new PlayerDeathHandler(_player, _gameFlow);
 
         _scoresCounterView.Initialize(_scoresCounter);
+        
+        _gameFlow = new GameFlow(_endWindow, _startWindow);
+        _gameFlow.GameStateChanged += OnGameStateChanged;
+        _gameFlow.ResetGame();
     }
 
     private void OnGameStateChanged(GameState gameState)

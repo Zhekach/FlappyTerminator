@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UnityEngine;
 
 public class StartWindow : Window
 {
@@ -7,6 +8,7 @@ public class StartWindow : Window
     
     protected override void OnButtonClick()
     {
+        Debug.Log("START Button OnEnable");
         PlayButtonClick?.Invoke();
     }
 
