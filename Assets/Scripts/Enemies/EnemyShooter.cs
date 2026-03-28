@@ -21,11 +21,6 @@ public class EnemyShooter : MonoBehaviour
         _weapon.Initialize(bulletsSpawner, _speed, _damage);
     }
 
-    private void OnEnable()
-    {
-        _shootRoutine = StartCoroutine(ShootRoutine());
-    }
-
     private void OnDisable()
     {
         if (_shootRoutine != null)
@@ -33,6 +28,11 @@ public class EnemyShooter : MonoBehaviour
             StopCoroutine(_shootRoutine);
             _shootRoutine = null;
         }
+    }
+    
+    public void Activate()
+    {
+        _shootRoutine = StartCoroutine(ShootRoutine());
     }
 
     private IEnumerator ShootRoutine()

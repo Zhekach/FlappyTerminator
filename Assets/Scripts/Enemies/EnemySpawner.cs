@@ -68,6 +68,7 @@ public class EnemySpawner : MonoBehaviour
         _activeEnemies.Add(enemy);
         enemy.Initialize(_bulletsSpawner);
         point.SetEnemy(enemy);
+        enemy.Activate();
         enemy.Died += OnEnemyDied;
     }
 

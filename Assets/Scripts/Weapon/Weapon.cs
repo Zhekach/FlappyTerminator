@@ -25,8 +25,11 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if(_bulletsSpawner == null)
+        if (_bulletsSpawner == null)
+        {
+            Debug.LogError("BulletsSpawner is null! Object: {name}"+ gameObject.name);
             return;
+        }
         
         var bullet = _bulletsSpawner.GetBullet();
         var position = _rigidbody.position;

@@ -31,6 +31,11 @@ public class Enemy : MonoBehaviour, IPoolable, IInteractable
         _health.Died -= OnDied;
     }
 
+    public void Activate()
+    {
+        _shooter.Activate();
+    }
+
     private void OnDied()
     {
         Died?.Invoke(this);
