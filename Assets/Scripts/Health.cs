@@ -24,7 +24,7 @@ public class Health : MonoBehaviour, IDamageable
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            Died?.Invoke();
+             Died?.Invoke();
         }
     }
 

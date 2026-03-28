@@ -8,20 +8,22 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<EnemyPoint> _points;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private Enemy _enemyPrefab;
-    
+
     private Pool<Enemy> _enemiesPool;
     private BulletsSpawner _bulletsSpawner;
     private OutOfBoundsDetector _outOfBoundsDetector;
-    
+    private List<Enemy> _activeEnemies;
+
     private float _timer;
 
     public event Action EnemyKilled;
     public event Action EnemyPassed;
-    
+
     private void Awake()
     {
         _enemiesPool = new Pool<Enemy>(_enemyPrefab);
         _enemiesPool.Initialize();
+        _activeEnemies = new List<Enemy>();
     }
 
     private void Update()
@@ -43,13 +45,19 @@ public class EnemySpawner : MonoBehaviour
         _outOfBoundsDetector.DetectedEnemy += OnEnemyOutOfBorders;
     }
 
+    public void Reset()
+    {
+        foreach (var enemy in _activeEnemies.ToArray())
+            ReleaseEnemy(enemy);
+    }
+
     private void TrySpawn()
     {
         var point = GetRandomPoint();
 
         if (point == null)
             return;
-        
+
         Spawn(point);
         _timer = 0f;
     }
@@ -57,6 +65,7 @@ public class EnemySpawner : MonoBehaviour
     private void Spawn(EnemyPoint point)
     {
         Enemy enemy = _enemiesPool.Get();
+        _activeEnemies.Add(enemy);
         enemy.Initialize(_bulletsSpawner);
         point.SetEnemy(enemy);
         enemy.Died += OnEnemyDied;
@@ -64,27 +73,31 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDied(Enemy enemy)
     {
-        enemy.Died -= OnEnemyDied;
-        _enemiesPool.Release(enemy);
+        ReleaseEnemy(enemy);
         EnemyKilled?.Invoke();
     }
 
     private void OnEnemyOutOfBorders(Enemy enemy)
     {
-        enemy.Died -= OnEnemyDied;
-        
-        if(enemy.gameObject.activeSelf == false)
+        if (enemy.gameObject.activeSelf == false)
             return;
-        
-        _enemiesPool.Release(enemy);
+
+        ReleaseEnemy(enemy);
         EnemyPassed?.Invoke();
+    }
+
+    private void ReleaseEnemy(Enemy enemy)
+    {
+        _activeEnemies.Remove(enemy);
+        enemy.Died -= OnEnemyDied;
+        _enemiesPool.Release(enemy);
     }
 
     private EnemyPoint GetRandomPoint()
     {
         int randomIndex = Random.Range(0, _points.Count);
         EnemyPoint result = _points[randomIndex];
-        
+
         return result;
     }
 }

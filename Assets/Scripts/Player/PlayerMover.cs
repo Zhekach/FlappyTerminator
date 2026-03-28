@@ -53,6 +53,7 @@ public class PlayerMover : MonoBehaviour
     public void Reset()
     {
         transform.position = new Vector3(0, 0, 0);
+        _rigidbody.linearVelocity = Vector2.zero;
         transform.rotation = Quaternion.identity;
     }
 

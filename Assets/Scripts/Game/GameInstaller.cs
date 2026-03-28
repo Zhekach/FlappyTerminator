@@ -56,7 +56,9 @@ public class GameInstaller : MonoBehaviour
     {
         if (gameState == GameState.ResetGame)
         {
-            _scoresCounter.ResetState();
+            _scoresCounter.Reset();
+            _bulletsSpawner.Reset();
+            _enemySpawner.Reset();
             _player.Reset();
         }
     }

@@ -7,7 +7,6 @@ public class EndWindow : Window
     
     protected override void OnButtonClick()
     {
-        Debug.Log("OnButtonClick");
         RestartButtonClick?.Invoke();
     }
 

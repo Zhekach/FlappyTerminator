@@ -23,7 +23,7 @@ public class ScoresCounter : MonoBehaviour
         _enemySpawner.EnemyPassed += OnEnemyPassed;
     }
 
-    public void ResetState()
+    public void Reset()
     {
         _scoresCount = 0;
         ScoresCountChanged?.Invoke(_scoresCount);
